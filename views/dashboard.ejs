@@ -23,7 +23,10 @@
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <script
+      src="https://kit.fontawesome.com/a076d05399.js"
+      crossorigin="anonymous"
+    ></script>
     <!-- Custom gradient style -->
     <style>
       .gradient {
@@ -31,165 +34,216 @@
       }
     </style>
   </head>
-  <body class="bg-gray-50 font-poppins" style="font-family: 'Source Sans Pro', sans-serif">
+  <body
+    class="bg-gray-50 font-poppins"
+    style="font-family: 'Source Sans Pro', sans-serif"
+  >
     <!-- Navbar Partial (assumed fixed) -->
     <%- include('partials/navbar.ejs', { loggedIn }) %>
-
 
     <!-- Dashboard Header: Only the heading has the gradient background -->
     <!-- The container is pushed down to avoid overlap with the fixed navbar -->
     <div class="pt-16">
-        <div class="shadow mb-6 gradient">
-          <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <h1 class="text-3xl font-bold text-white">
-              Welcome, <%= user.name %>
-            </h1>
-          </div>
+      <div class="shadow mb-6 gradient">
+        <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+          <h1 class="text-3xl font-bold text-white">
+            Welcome, <%= user.name %>
+          </h1>
         </div>
       </div>
+    </div>
 
     <!-- Main Dashboard Content (default background) -->
     <div class="max-w-7xl mx-auto pb-6 sm:px-6 lg:px-8 space-y-6">
       <% if (user.role === 'ADMIN') { %>
-        <!-- Admin Dashboard Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Total Students</h3>
-              <span class="text-2xl font-bold text-[#004aad]"><%= data.totalStudents %></span>
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Pending Issues</h3>
-              <span class="text-2xl font-bold text-[#cb6ce6]"><%= data.pendingIssues %></span>
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Fee Defaulters</h3>
-              <span class="text-2xl font-bold text-red-500"><%= data.feeDefaulters %></span>
-            </div>
+      <!-- Admin Dashboard Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">Total Students</h3>
+            <span class="text-2xl font-bold text-[#004aad]"
+              ><%= data.totalStudents %></span
+            >
           </div>
         </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">Pending Issues</h3>
+            <span class="text-2xl font-bold text-[#cb6ce6]"
+              ><%= data.pendingIssues %></span
+            >
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">Fee Defaulters</h3>
+            <span class="text-2xl font-bold text-red-500"
+              ><%= data.feeDefaulters %></span
+            >
+          </div>
+        </div>
+      </div>
 
-        <!-- Performance Metrics Section -->
-        <div class="bg-white rounded-lg shadow mt-8">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-4 text-gray-800">Performance Metrics</h3>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-              <div class="text-center">
-                <div class="text-4xl font-bold text-[#004aad]"><%= data.statistics.issuesResolved %>%</div>
-                <div class="text-sm text-gray-600">Issues Resolved</div>
+      <!-- Performance Metrics Section -->
+      <div class="bg-white rounded-lg shadow mt-8">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">
+            Performance Metrics
+          </h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="text-center">
+              <div class="text-4xl font-bold text-[#004aad]">
+                <%= data.statistics.issuesResolved %>%
               </div>
-              <div class="text-center">
-                <div class="text-4xl font-bold text-[#cb6ce6]"><%= data.statistics.feeCollection %>%</div>
-                <div class="text-sm text-gray-600">Fee Collection</div>
+              <div class="text-sm text-gray-600">Issues Resolved</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-bold text-[#cb6ce6]">
+                <%= data.statistics.feeCollection %>%
               </div>
-              <div class="text-center">
-                <div class="text-4xl font-bold text-green-500"><%= data.statistics.messRating %>/5</div>
-                <div class="text-sm text-gray-600">Mess Rating</div>
+              <div class="text-sm text-gray-600">Fee Collection</div>
+            </div>
+            <div class="text-center">
+              <div class="text-4xl font-bold text-green-500">
+                <%= data.statistics.messRating %>/5
               </div>
+              <div class="text-sm text-gray-600">Mess Rating</div>
             </div>
           </div>
         </div>
+      </div>
       <% } else if (user.role === 'WARDEN') { %>
-        <!-- Warden Dashboard Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Assigned Issues</h3>
-              <span class="text-2xl font-bold text-[#004aad]"><%= data.assignedIssues %></span>
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Pending Approvals</h3>
-              <span class="text-2xl font-bold text-[#cb6ce6]"><%= data.pendingApprovals %></span>
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Today's Attendance</h3>
-              <span class="text-2xl font-bold text-green-500"><%= data.todayAttendance %>%</span>
-            </div>
+      <!-- Warden Dashboard Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">Assigned Issues</h3>
+            <span class="text-2xl font-bold text-[#004aad]"
+              ><%= data.assignedIssues %></span
+            >
           </div>
         </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">
+              Pending Approvals
+            </h3>
+            <span class="text-2xl font-bold text-[#cb6ce6]"
+              ><%= data.pendingApprovals %></span
+            >
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">
+              Today's Attendance
+            </h3>
+            <span class="text-2xl font-bold text-green-500"
+              ><%= data.todayAttendance %>%</span
+            >
+          </div>
+        </div>
+      </div>
       <% } else { %>
-        <!-- Student Dashboard Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Pending Fees</h3>
-              <span class="text-2xl font-bold text-red-500">₹<%= data.pendingFees %></span>
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Mess Credits</h3>
-              <span class="text-2xl font-bold text-[#004aad]"><%= data.messCredits %></span>
-            </div>
-          </div>
-          <div class="bg-white rounded-lg shadow p-6">
-            <div class="flex items-center justify-between">
-              <h3 class="text-lg font-semibold text-gray-800">Active Complaints</h3>
-              <span class="text-2xl font-bold text-[#cb6ce6]"><%= data.activeComplaints %></span>
-            </div>
+      <!-- Student Dashboard Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">Pending Fees</h3>
+            <span class="text-2xl font-bold text-red-500"
+              >₹<%= data.pendingFees %></span
+            >
           </div>
         </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">Mess Credits</h3>
+            <span class="text-2xl font-bold text-[#004aad]"
+              ><%= data.messCredits %></span
+            >
+          </div>
+        </div>
+        <div class="bg-white rounded-lg shadow p-6">
+          <div class="flex items-center justify-between">
+            <h3 class="text-lg font-semibold text-gray-800">
+              Active Complaints
+            </h3>
+            <span class="text-2xl font-bold text-[#cb6ce6]"
+              ><%= data.activeComplaints %></span
+            >
+          </div>
+        </div>
+      </div>
 
-        <!-- Notices Section -->
-        <div class="bg-white rounded-lg shadow mt-8">
-          <div class="p-6">
-            <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Notices</h3>
-            <div class="space-y-4">
-              <% data.notices.forEach(notice => { %>
-                <div class="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
-                  <div class="flex items-center">
-                    <div class="ml-3">
-                      <p class="text-sm font-medium text-gray-900"><%= notice.title %></p>
-                      <p class="text-sm text-gray-500"><%= notice.date %></p>
-                    </div>
-                  </div>
-                  <button class="px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#cb6ce6] text-white rounded-md hover:opacity-90 transition-opacity">
-                    View
-                  </button>
+      <!-- Notices Section -->
+      <div class="bg-white rounded-lg shadow mt-8">
+        <div class="p-6">
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">
+            Recent Notices
+          </h3>
+          <div class="space-y-4">
+            <% data.notices.forEach(notice => { %>
+            <div
+              class="flex items-center justify-between p-4 bg-gray-50 rounded-lg"
+            >
+              <div class="flex items-center">
+                <div class="ml-3">
+                  <p class="text-sm font-medium text-gray-900">
+                    <%= notice.title %>
+                  </p>
+                  <p class="text-sm text-gray-500"><%= notice.date %></p>
                 </div>
-              <% }) %>
+              </div>
+              <button
+                class="px-4 py-2 bg-gradient-to-r from-[#004aad] to-[#cb6ce6] text-white rounded-md hover:opacity-90 transition-opacity"
+              >
+                View
+              </button>
             </div>
+            <% }) %>
           </div>
         </div>
+      </div>
       <% } %>
 
       <!-- Recent Activities Section -->
       <div class="bg-white rounded-lg shadow">
         <div class="p-6">
-          <h3 class="text-xl font-semibold mb-4 text-gray-800">Recent Activities</h3>
+          <h3 class="text-xl font-semibold mb-4 text-gray-800">
+            Recent Activities
+          </h3>
           <% if (data.recentActivities) { %>
-            <div class="space-y-4">
-              <% data.recentActivities.forEach(activity => { %>
-                <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                  <div class="flex-1">
-                    <p class="text-sm text-gray-900"><%= activity.text %></p>
-                    <p class="text-xs text-gray-500"><%= activity.time %></p>
-                  </div>
-                </div>
-              <% }) %>
+          <div class="space-y-4">
+            <% data.recentActivities.forEach(activity => { %>
+            <div class="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
+              <div class="flex-1">
+                <p class="text-sm text-gray-900"><%= activity.text %></p>
+                <p class="text-xs text-gray-500"><%= activity.time %></p>
+              </div>
             </div>
+            <% }) %>
+          </div>
           <% } %>
         </div>
       </div>
     </div>
 
     <!-- Quick Actions Modal -->
-    <div id="quickActionsModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50">
+    <div
+      id="quickActionsModal"
+      class="hidden fixed inset-0 bg-black bg-opacity-50 z-50"
+    >
       <div class="flex items-center justify-center min-h-screen px-4">
         <div class="bg-white rounded-lg shadow-xl max-w-md w-full">
           <div class="p-6">
-            <h3 class="text-lg font-semibold mb-4 text-gray-800">Quick Actions</h3>
+            <h3 class="text-lg font-semibold mb-4 text-gray-800">
+              Quick Actions
+            </h3>
             <form id="quickActionForm" class="space-y-4">
               <div>
-                <label class="block text-sm font-medium text-gray-700">Action Type</label>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Action Type</label
+                >
                 <select
                   id="actionType"
                   class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-[#004aad] focus:ring-[#004aad]"
@@ -201,7 +255,9 @@
                 </select>
               </div>
               <div>
-                <label class="block text-sm font-medium text-gray-700">Description</label>
+                <label class="block text-sm font-medium text-gray-700"
+                  >Description</label
+                >
                 <textarea
                   id="actionDescription"
                   rows="4"
@@ -231,7 +287,23 @@
 
     <!-- Navbar JS -->
     <script src="/js/navbar.js"></script>
-
+    <style>
+      .perspective {
+        perspective: 1200px;
+      }
+      .transform-style-3d {
+        transform-style: preserve-3d;
+      }
+      .backface-hidden {
+        backface-visibility: hidden;
+      }
+      .rotate-y-180 {
+        transform: rotateY(180deg);
+      }
+      .perspective:hover .transform-style-3d {
+        transform: rotateY(180deg);
+      }
+    </style>
     <%- include('partials/footer.ejs') %>
   </body>
-</html> 
+</html>
